@@ -1,7 +1,25 @@
 spring:
   application:
     name: hello-service
+
+
+---
+server:
+  port: 8001
+spring:
+  profiles: client1
 eureka:
   client:
-    serviceUrl:
-      defaultZone: http://localhost:8260/eureka
+    service-url:
+      defaultZone: http://peer1:1111/eureka/
+---
+server:
+  port: 8002
+spring:
+  profiles: client2
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer2:1111/eureka/
+
+---

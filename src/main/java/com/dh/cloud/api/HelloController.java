@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Random;
 import java.util.logging.Logger;
 
 /**
@@ -21,12 +22,10 @@ public class HelloController {
     private DiscoveryClient client ;
 
     @RequestMapping(value="hello",method= RequestMethod.GET)
-    public String hello(){
-        client.getServices().forEach(id -> {
-            client.getInstances(id).forEach(instance -> {
-                logger.info("/hello, host:" + instance.getHost() + ", service_id:" + instance.getServiceId());
-            });
-        });
+    public String hello() throws InterruptedException {
+        int sleepTime = new Random().nextInt(3000);
+        logger.info("sleepTime:" + sleepTime);
+        Thread.sleep(sleepTime);
         return "Hello World" ;
     }
 }
